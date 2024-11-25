@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sqflite_app/data/local/db_helper.dart';
 import 'package:sqflite_app/pages/add_note.dart';
+import 'package:sqflite_app/pages/settings.dart';
 import 'package:sqflite_app/provider/db_provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,6 +24,31 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Notes"),
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (ctx) {
+              return [
+                PopupMenuItem(
+                  child: const Row(
+                    children: [
+                      Icon(Icons.settings),
+                      SizedBox(width: 11),
+                      Text('Settings')
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (ctx) => const SettingsPage(),
+                      ),
+                    );
+                  },
+                ),
+              ];
+            },
+          ),
+        ],
       ),
       body: Consumer<DbProvider>(
         builder: (ctx, provider, __) {
