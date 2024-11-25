@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite_app/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:sqflite_app/data/local/db_helper.dart';
+import 'package:sqflite_app/pages/home_page.dart';
+import 'package:sqflite_app/provider/db_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => DbProvider(dbHelper: DBHelper.getInstance),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
